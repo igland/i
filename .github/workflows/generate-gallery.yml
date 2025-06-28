@@ -63,12 +63,14 @@ jobs:
                   const src = imagePaths[i];
                   const wrapper = document.createElement('a');
                   wrapper.href = src;
-                  wrapper.setAttribute('data-pswp-width', 1600);
-                  wrapper.setAttribute('data-pswp-height', 1200);
                   wrapper.className = 'img-box';
                   const img = document.createElement('img');
                   img.src = src;
                   img.alt = src.split('/').pop();
+                  img.onload = () => {
+                    wrapper.setAttribute('data-pswp-width', img.naturalWidth);
+                    wrapper.setAttribute('data-pswp-height', img.naturalHeight);
+                  };
                   wrapper.appendChild(img);
                   galleryEl.appendChild(wrapper);
                 }
